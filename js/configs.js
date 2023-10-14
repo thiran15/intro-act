@@ -4,12 +4,13 @@
 
 angular.module('myApp.constants', ['BotDetectCaptcha']).
   constant('configdetails', {
-        base_url: 'http://localhost/introact_new/',
+        //base_url: 'http://localhost/introact_new/',
         //base_url: 'http://demo.creativebees.in/introact/',
+        base_url: 'https://www.intro-act.com/',
     })
     .config(function(captchaSettingsProvider) {
       captchaSettingsProvider.setSettings({
         captchaEndpoint: 
-          'http://localhost/introact_v3/captcha/botdetect-captcha-lib/simple-botdetect.php'
+          'https://www.intro-act.com/captcha/botdetect-captcha-lib/simple-botdetect.php'
       });
     });
