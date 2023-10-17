@@ -90,7 +90,7 @@ angular.module('myApp.corporateCtrl', ['ui.bootstrap','socialshare'])
 
         $scope.validlink = 0;
 
-        $scope.spinnerActive = true;
+       // $scope.spinnerActive = true;
 
         var url = "apiv4/public/user/checkresetpassword";
 		var params = {hashId:$routeParams.hashId};
@@ -451,6 +451,8 @@ angular.module('myApp.corporateCtrl', ['ui.bootstrap','socialshare'])
 
         $scope.industry_title = $routeParams.industry;
         $scope.initialfilter = $routeParams.initialfilter;
+
+        
      
         if($routeParams.rootpath){
             if($routeParams.rootpath.toLowerCase()=='new capital' || $routeParams.rootpath.toLowerCase()=='new-capital' || $routeParams.rootpath.toLowerCase()=='newcapital'){

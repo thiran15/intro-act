@@ -1009,13 +1009,7 @@ angular.module('myApp.directives', [])
 
         }
 
-
-        $scope.spinnerActive = true;
-
-        setTimeout(function myGreeting() {
-          $scope.spinnerActive = false;
-        }, 500);
-
+ 
         
        
 
@@ -2162,6 +2156,16 @@ angular.module('myApp.directives', [])
           for(var key in customOptions) {
             defaultOptions[key] = customOptions[key];
           }
+
+          $scope.innerdwidh = $window.innerWidth;
+
+          if($scope.innerdwidh>760){
+            defaultOptions[items] = 3;
+          }else{
+            defaultOptions[items] = 1;
+          }
+
+         
           // init carousel
           $(element).owlCarousel(defaultOptions);
         };
