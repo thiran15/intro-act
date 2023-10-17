@@ -987,7 +987,7 @@ angular.module('myApp.directives', [])
       controller: function ($scope, $location) {
 
         $scope.loadingbutton = false;
-       
+       console.log('asas');
         $scope.sactivemenu = 2;
 
         if($location.path()=='/login' || $location.path()=='/newslettercategory'  || $location.path()=='/stasharchive' || $location.path()=='/irarchive' || $location.path()=='/spacarchive' || $location.path()=='/topresearchproviders' || $location.path().indexOf('/researchspotlight/') != -1){
@@ -2164,6 +2164,8 @@ angular.module('myApp.directives', [])
           }else{
             defaultOptions[items] = 1;
           }
+		  
+		      console.log(defaultOptions);
 
          
           // init carousel
