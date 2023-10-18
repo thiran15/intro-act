@@ -2269,8 +2269,8 @@ body{
 {
   #technologyTab > li
     {
-    width: 24%;
-    margin: .5%
+    width: 22%;
+    margin: .2%
   }
 
 #newuistyles .filter-col li span,.df-filter-col li span {
@@ -3427,7 +3427,7 @@ body{
   background: rgb(246, 246, 246);
 }
 /* alert Service */
-#newuistyles .sw4_notify {
+.sw4_notify {
   position: fixed;
   top: 0;
   width: 100%;
@@ -3435,13 +3435,13 @@ body{
   border-radius: 0 !important;
 }
 
-#newuistyles .sw4_notify > alert{
+.sw4_notify > alert{
   /* width: 100% ; */
   display: block;
   border-radius: 0 !important;
   margin-bottom: 10px;
 }
-#newuistyles alert.alert.alert-warning {
+alert.alert.alert-warning {
   position: fixed;
   right: 10px;
   z-index: 1000;
@@ -3450,7 +3450,7 @@ body{
   padding: 15px 10px;
   z-index: 999999;
 }
-#newuistyles alert.alert.alert-success {
+alert.alert.alert-success {
   position: fixed;
   right: 10px;
   z-index: 1000;
@@ -3459,79 +3459,79 @@ body{
   padding: 15px 10px;
   z-index: 999999;
 }
-#newuistyles .alert {
+.alert {
   padding: 15px;
   margin-bottom: 20px;
   border: 1px solid transparent;
   border-radius: 4px
 }
-#newuistyles .alert h4 {
+.alert h4 {
   margin-top: 0;
   color: inherit
 }
-#newuistyles .alert .alert-link {
+.alert .alert-link {
   font-weight: 700
 }
-#newuistyles .alert>p,
-#newuistyles .alert>ul {
+.alert>p,
+.alert>ul {
   margin-bottom: 0
 }
-#newuistyles .alert>p+p {
+.alert>p+p {
   margin-top: 5px
 }
-#newuistyles .alert-dismissable,
-#newuistyles .alert-dismissible {
+.alert-dismissable,
+.alert-dismissible {
   padding-right: 35px
 }
-#newuistyles .alert-dismissable .close,
-#newuistyles .alert-dismissible .close {
+.alert-dismissable .close,
+.alert-dismissible .close {
   position: relative;
   top: -2px;
   right: -21px;
   color: inherit
 }
-#newuistyles .alert-success {
+.alert-success {
   color: #3c763d;
   background-color: #dff0d8;
   border-color: #d6e9c6
 }
-#newuistyles .alert-success hr {
+.alert-success hr {
   border-top-color: #c9e2b3
 }
-#newuistyles .alert-success .alert-link {
+.alert-success .alert-link {
   color: #2b542c
 }
-#newuistyles .alert-info {
+.alert-info {
   color: #31708f;
   background-color: #d9edf7;
   border-color: #bce8f1
 }
-#newuistyles .alert-info hr {
+.alert-info hr {
   border-top-color: #a6e1ec
 }
-#newuistyles .alert-info .alert-link {
+.alert-info .alert-link {
   color: #245269
 }
-#newuistyles .alert-warning {
+.alert-warning {
   color: #f7f7f7;
   background-color: #bb2e29;
   border-color: #bb2e29
 }
-#newuistyles .alert-warning hr {
+.alert-warning hr {
   border-top-color: #f7e1b5
 }
-#newuistyles .alert-warning .alert-link {
+.alert-warning .alert-link {
   color: #66512c
 }
-#newuistyles .alert-danger {
+.alert-danger {
   color: #a94442;
   background-color: #f2dede;
   border-color: #ebccd1
 }
-#newuistyles .alert-danger hr {
+.alert-danger hr {
   border-top-color: #e4b9c0
 }
-#newuistyles .alert-danger .alert-link {
+.alert-danger .alert-link {
   color: #843534
 }
 #newuistyles .spinner {
@@ -3769,5 +3769,41 @@ body{
   }
 #newuistyles .dealflowpop{
     top:100px;
+  }
+}
+
+#newuistyles .topbreadcrumb{
+    margin-top: 60px;
+}
+@media screen and (max-width:1000px)
+{
+  #newuistyles .industypebutton{
+    margin-left: 0px !important;
+  }
+}
+
+@media screen and (max-width:700px)
+{
+  #newuistyles .topbreadcrumb{
+    margin-top: 70px;
+  }
+  #newuistyles .text-sm {
+    font-size: 0.600rem; 
+  }
+}
+
+@media screen and (max-width:700px)
+{
+  #newuistyles .topbreadcrumb{
+    margin-top: 70px;
+  }
+}
+
+@media screen and (max-width:500px)
+{
+  #technologyTab > li
+    {
+    width: 18%;
+    margin: .1%
   }
 }

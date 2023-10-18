@@ -658,9 +658,15 @@ angular.module('myApp.corporateCtrl', ['ui.bootstrap','socialshare'])
         $scope.column = 'date';
         $scope.reverse = true;
 
+        $scope.loadingindustrydata = '0';
+         
         $scope.getindustrydata = function (page) {
 
             $scope.loadnextpage = 0;
+
+            if(page>1){
+              $scope.loadingindustrydata = '1';
+            }
             
             var GetindustrydataList = 'apiv4/public/corporate/getindustrydata';
             var params = {industry:$scope.industry_title,filtered:$scope.filtered,tickerfilter:$scope.tickerfilter,filtertext:$scope.filtertext,page:page};
@@ -672,7 +678,7 @@ angular.module('myApp.corporateCtrl', ['ui.bootstrap','socialshare'])
                     $scope.industrydata_total_count = result.data.page_count;
                   //  $scope.total_industrydata_count = result.data.total_list_count;
                 }
-
+                $scope.loadingindustrydata = '0';
                 $scope.nextpage = result.data.page;
 
                 if($scope.industrydata_total_count>=result.data.page){
@@ -1451,6 +1457,7 @@ angular.module('myApp.corporateCtrl', ['ui.bootstrap','socialshare'])
 
         $scope.upcomingevents = [];
 
+      
         $scope.getupcomingevents = function () {
             $scope.spinnerActive = true;
 

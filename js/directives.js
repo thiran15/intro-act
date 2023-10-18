@@ -986,8 +986,7 @@ angular.module('myApp.directives', [])
       },
       controller: function ($scope, $location) {
 
-        $scope.loadingbutton = false;
-       console.log('asas');
+        $scope.loadingbutton = false; 
         $scope.sactivemenu = 2;
 
         if($location.path()=='/login' || $location.path()=='/newslettercategory'  || $location.path()=='/stasharchive' || $location.path()=='/irarchive' || $location.path()=='/spacarchive' || $location.path()=='/topresearchproviders' || $location.path().indexOf('/researchspotlight/') != -1){
@@ -1327,8 +1326,21 @@ angular.module('myApp.directives', [])
         $scope.checkregister = function () {
           $scope.registererrorMsg = '';
 
-          if (!$scope.valid) {
-            alertService.add("warning", "Please enter correct captcha!", 2000);
+          if (angular.isUndefined($scope.acregister.company) || $scope.acregister.company == '') {
+            alertService.add("warning", "Please enter company!", 2000);
+            return false;
+          }
+          if (angular.isUndefined($scope.acregister.password) || $scope.acregister.password == '') {
+            alertService.add("warning", "Please enter password!", 2000);
+            return false;
+          }
+          if (angular.isUndefined($scope.acregister.confirm) || $scope.acregister.confirm == '') {
+            alertService.add("warning", "Please enter confirm password!", 2000);
+            return false;
+          }
+           
+          if ($scope.acregister.confirm != $scope.acregister.password) {
+            alertService.add("warning", "Password does not match with confirm password!", 2000);
             return false;
           }
 
@@ -1348,23 +1360,14 @@ angular.module('myApp.directives', [])
             alertService.add("warning", "Please enter valid email!", 2000);
             return false;
           }
-          if (angular.isUndefined($scope.acregister.company) || $scope.acregister.company == '') {
-            alertService.add("warning", "Please enter company!", 2000);
-            return false;
-          }
-          if (angular.isUndefined($scope.acregister.password) || $scope.acregister.password == '') {
-            alertService.add("warning", "Please enter password!", 2000);
-            return false;
-          }
-          if (angular.isUndefined($scope.acregister.confirm) || $scope.acregister.confirm == '') {
-            alertService.add("warning", "Please enter confirm password!", 2000);
-            return false;
-          }
-          if ($scope.acregister.confirm != $scope.acregister.password) {
-            alertService.add("warning", "Password does not match with confirm password!", 2000);
+          if (!$scope.valid) {
+            alertService.add("warning", "Please enter correct captcha!", 2000);
             return false;
           }
 
+         
+         
+         
           var url = "apiv4/public/corporate/staticuserregister";
           var params = {user:$scope.acregister};
           RequestDetail.getDetail(url, params).then(function (result) { // Result return
@@ -2142,7 +2145,7 @@ angular.module('myApp.directives', [])
       }
     };
   }])
-  .directive("owlCarousel", function() {
+  .directive("owlCarousel", function($window) {
     return {
       restrict: 'E',
       transclude: false,
@@ -2157,17 +2160,14 @@ angular.module('myApp.directives', [])
             defaultOptions[key] = customOptions[key];
           }
 
-          $scope.innerdwidh = $window.innerWidth;
+          var innerdwidh = $window.innerWidth;
 
-          if($scope.innerdwidh>760){
-            defaultOptions[items] = 3;
+          if(innerdwidh>760){
+            defaultOptions['items'] = 3;
           }else{
-            defaultOptions[items] = 1;
+            defaultOptions['items'] = 1;
           }
-		  
-		      console.log(defaultOptions);
-
-         
+		   
           // init carousel
           $(element).owlCarousel(defaultOptions);
         };
