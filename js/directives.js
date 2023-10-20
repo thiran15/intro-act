@@ -971,11 +971,7 @@ angular.module('myApp.directives', [])
     var userdata = localStorageService.get('userdata');
     var userimage = localStorageService.get('userimage');
 
-
-   
-   
-
-   
+ 
     return {
       // controller: "mainControl",
       restrict: 'AE',
@@ -1086,7 +1082,7 @@ angular.module('myApp.directives', [])
 				//  var getType = RequestDetail.getDetail(url,params);
 				RequestDetail.getDetail(url, params).then(function (result) { // Result return
 
-					$scope.spinnerActive = false;
+					 
 
 					if (!angular.isUndefined(result.data) && result.data.status == "success") {
 

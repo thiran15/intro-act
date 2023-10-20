@@ -438,6 +438,8 @@ angular.module('myApp.corporateCtrl', ['ui.bootstrap','socialshare'])
     .controller('industryCtrl', function ($scope, $http, $location, $routeParams, localStorageService, RequestDetail, configdetails, $sce, usertype,alertService,Useractivity) {
         $scope.configdetails = configdetails;
 
+        $scope.spinnerActive = true;
+
          
         $scope.filter = {};
         $scope.filtered = [];
@@ -751,7 +753,8 @@ angular.module('myApp.corporateCtrl', ['ui.bootstrap','socialshare'])
             var params = {industry:$scope.industry_title,filtered:$scope.filtered};
 
             RequestDetail.getDetail(GetindustrydataList, params).then(function (result) {
-                $scope.companies = result.data;                
+                $scope.companies = result.data;    
+                $scope.spinnerActive = false;            
             });
         }
 
