@@ -10794,7 +10794,7 @@ angular.module('myApp.profileCtrl', ['ui.bootstrap'])
 				return false;
 			}
 
-			if($scope.report.newtickerrequest){
+			if(!$scope.report.newtickerrequest){
 				$scope.report.newticker = $scope.report.ticker[0];
 			}
 
