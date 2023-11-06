@@ -40,7 +40,7 @@ angular.module('myApp.corporateCtrl', ['ui.bootstrap','socialshare'])
 		$scope.contactsubmit = function () {
 
             
-            if (!$scope.valid) {
+      if (!$scope.valid) {
 				alertService.add("warning", "Please enter correct captcha!", 2000);
 				return false;
 			}

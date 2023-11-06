@@ -10693,6 +10693,131 @@ angular.module('myApp.profileCtrl', ['ui.bootstrap'])
 
 
 	})
+	.controller('requestscorecardCtrl', function ($scope, $http, $location, localStorageService, $rootScope, usertype, validation, RequestDetail, $timeout, configdetails, alertService, $routeParams) {
+		
+		$scope.spinnerActive = true;
+
+		setTimeout(function myGreeting() {
+			$scope.spinnerActive = false;
+		}, 100);
+	
+		$scope.report = {};
+		$scope.report.firstname = '';
+		$scope.report.lastname = '';
+		$scope.report.email = '';
+		$scope.report.company = '';
+		$scope.report.contact = '';
+		$scope.report.newticker = '';
+		$scope.report.ticker = [];
+		$scope.report.agree = false;
+
+		$scope.report.newtickerrequest = 0;
+
+		$scope.termspopupmodel = false;
+		
+		$scope.newtickeropen = function (val) {
+			$scope.report.newtickerrequest = val;
+		}
+
+		$scope.get_search_details = function (type, searchkey, industype) {
+            if (angular.isDefined(searchkey) && searchkey != '') {
+                if (type != '') {
+                    var tagUrl = 'apiv4/public/user/get_search_details1';
+                    var searchterm = searchkey;
+                    if (type == 'tickerlive') {
+                        var params = searchterm;
+                        var tagUrl = 'apiv4/public/dashboard/get_auto_ticker_stocklive';
+                        RequestDetail.getDetail(tagUrl, params).then(function (result) {
+                            if (angular.isDefined(result.data) && result.data.length > 0) {
+                                $scope.availableTickers = result.data;
+                            } else {
+                                $scope.availableTickers = [];
+                            }
+                        });
+                    }
+      
+                }
+            }
+		}
+
+		
+		
+		$scope.terms_modal_class = 'hidden';
+
+        $scope.termopen = function () {
+          $scope.terms_modal_class = '';
+        }
+    
+        $scope.closeModalterm = function () {
+          $scope.terms_modal_class = 'hidden';
+        }
+		
+
+		$scope.submitrequest = function () {
+ 
+			if (angular.isUndefined($scope.report.newticker) && $scope.report.ticker.length == 0) {
+				alertService.add("warning", "Please Enter Ticker!", 2000);
+                return false;
+			}
+			if ($scope.report.newticker=='' && $scope.report.ticker.length == 0) {
+				alertService.add("warning", "Please Enter Ticker!", 2000);
+                return false;
+			}
+			if($scope.report.company==""){
+                alertService.add("warning", "Please Enter Company Name!", 2000);
+                return false;
+			}
+			if($scope.report.firstname==""){
+                alertService.add("warning", "Please Enter First Name!", 2000);
+                return false;
+            }
+            if($scope.report.lastname==""){
+                alertService.add("warning", "Please Enter Last Name!", 2000);
+                return false;
+            }
+            if($scope.report.email==""){
+                alertService.add("warning", "Please Enter Email!", 2000);
+                return false;
+			}
+
+			if (!$scope.checkemailval($scope.report.email)) {
+				alertService.add("warning", "Please Enter Valid Email!", 2000);
+                return false;
+			}
+			if($scope.report.contact==""){
+                alertService.add("warning", "Please Enter Phone Number!", 2000);
+                return false;
+			}
+			 
+			if (!$scope.valid) {
+				alertService.add("warning", "Please enter correct captcha!", 2000);
+				return false;
+			}
+			var tagUrl = 'apiv4/public/user/submitscorecard2';
+			var params = $scope.report;
+			RequestDetail.getDetail(tagUrl, params).then(function (result) {
+				$scope.report = {};
+				$scope.report.firstname = '';
+				$scope.report.lastname = '';
+				$scope.report.email = '';
+				$scope.report.company = '';
+				$scope.report.contact = '';
+				$scope.report.newticker = '';
+				$scope.report.ticker = [];
+				$scope.report.agree = false;
+
+				$scope.report.newtickerrequest = 0;
+				alertService.add("success", "Requested Successfully !", 2000);
+			});
+		}
+
+		$scope.checkemailval = function (email) {
+			var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			return re.test(String(email).toLowerCase());
+		}
+		
+		
+	})
 	.controller('tickerreportCtrl', function ($scope, $http, $location, localStorageService, $rootScope, usertype, validation, RequestDetail, $timeout, configdetails, alertService, $routeParams) {
 		
 		$scope.spinnerActive = true;
