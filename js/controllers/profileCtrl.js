@@ -10793,6 +10793,11 @@ angular.module('myApp.profileCtrl', ['ui.bootstrap'])
 				alertService.add("warning", "Please enter correct captcha!", 2000);
 				return false;
 			}
+
+			if($scope.report.newtickerrequest){
+				$scope.report.newticker = $scope.report.ticker[0];
+			}
+
 			var tagUrl = 'apiv4/public/user/submitscorecard2';
 			var params = $scope.report;
 			RequestDetail.getDetail(tagUrl, params).then(function (result) {
