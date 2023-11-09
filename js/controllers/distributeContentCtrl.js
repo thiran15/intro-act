@@ -3316,8 +3316,8 @@ angular.module('myApp.distributeContentCtrl', ['ui.bootstrap'])
         $scope.dateOptions = {
             // dateDisabled: disabled,
             formatYear: 'yy',
-            maxDate: new Date(2020, 5, 22),
-            minDate: new Date(),
+            maxDate: new Date().setDate(new Date().getDate() + 7),
+            minDate: new Date().toLocaleString("en-US", {timeZone: "America/New_York"}),
             startingDay: 1
           };
 

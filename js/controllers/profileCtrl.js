@@ -10811,7 +10811,7 @@ angular.module('myApp.profileCtrl', ['ui.bootstrap'])
 				var tagUrl = 'apiv4/public/user/submitscorecard2';
 				var params = {report:$scope.report,peers:$scope.peersTickers};
 				RequestDetail.getDetail(tagUrl, params).then(function (result) {
-					/*$scope.report = {};
+					$scope.report = {};
 					$scope.report.name = ''; 
 					$scope.report.email = '';
 					$scope.report.company = '';
@@ -10821,7 +10821,7 @@ angular.module('myApp.profileCtrl', ['ui.bootstrap'])
 					$scope.report.agree = false;
 					$scope.peersTickers = [];
 	
-					$scope.report.newtickerrequest = 0;*/
+					$scope.report.newtickerrequest = 0;
 					alertService.add("success", "Requested Successfully !", 2000);
 				});
 			}
