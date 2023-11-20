@@ -583,8 +583,8 @@ angular.module('myApp.corporateCtrl', ['ui.bootstrap','socialshare'])
             $scope.primer_file='Space Tech_Primer.pdf';
  
             $scope.dashboarddatas = {
-                0: { pdf: "https://app.powerbi.com/view?r=eyJrIjoiOWYwZDExMWItZDA0MC00M2FiLWIxMGItYzk3NDY4N2FmZWYxIiwidCI6IjQzZDI5NzNlLTJiYTQtNDljNy1iYTM5LTllZDc4MmQwMWEwZiIsImMiOjN9", name: "Launches Dashboard"},
-                1: { pdf: "https://app.powerbi.com/view?r=eyJrIjoiYjNkMzYzZDAtYmFlMy00MTgzLThlZjEtNGNkNzE3NjM4YWQ2IiwidCI6IjQzZDI5NzNlLTJiYTQtNDljNy1iYTM5LTllZDc4MmQwMWEwZiIsImMiOjN9", name: "Government Contracts and Private Funding Dashboard"},
+                0: { pdf: "https://app.powerbi.com/view?r=eyJrIjoiZDZmODE5ZWItNjFlYS00NDlmLTlmMmItN2UwODMxMjA4NThiIiwidCI6IjQzZDI5NzNlLTJiYTQtNDljNy1iYTM5LTllZDc4MmQwMWEwZiIsImMiOjN9", name: "Launches Dashboard"},
+                1: { pdf: "https://app.powerbi.com/view?r=eyJrIjoiNDc5YjJhMjQtMTdlZC00MWMwLTkxMTktZjJjZmMyMWIwMjY3IiwidCI6IjQzZDI5NzNlLTJiYTQtNDljNy1iYTM5LTllZDc4MmQwMWEwZiIsImMiOjN9", name: "Government Contracts and Private Funding Dashboard"},
             };
 
         }
