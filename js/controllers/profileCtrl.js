@@ -12792,6 +12792,35 @@ angular.module('myApp.profileCtrl', ['ui.bootstrap'])
             $scope.spinnerActive = false;
         });
     })
+	.controller('fintecharchiveCtrl', function ($scope, $routeParams, $http, $location, RequestDetail, alertService, configdetails, localStorageService) {
+        $scope.sidepopupactive=false;
+        $scope.spinnerActive = true;
+	    $scope.sidepopup = function() {
+		    $scope.sidepopupactive=!$scope.sidepopupactive;
+        }
+
+        var url = 'apiv4/public/dashboard/getfintecharchive';
+        var params = { };
+        RequestDetail.getDetail(url, params).then(function (result) {
+            $scope.archives = result.data;
+            $scope.spinnerActive = false;
+        });
+    })
+	.controller('metaversearchiveCtrl', function ($scope, $routeParams, $http, $location, RequestDetail, alertService, configdetails, localStorageService) {
+        $scope.sidepopupactive=false;
+        $scope.spinnerActive = true;
+	    $scope.sidepopup = function() {
+		    $scope.sidepopupactive=!$scope.sidepopupactive;
+        }
+
+        var url = 'apiv4/public/dashboard/getmetaversearchive';
+        var params = { };
+        RequestDetail.getDetail(url, params).then(function (result) {
+            $scope.archives = result.data;
+            $scope.spinnerActive = false;
+        });
+    })
+	
     .controller('researcharchive', function ($scope, $routeParams, $http, $location, RequestDetail, alertService, configdetails, localStorageService) {
         $scope.sidepopupactive=false;
         $scope.spinnerActive = true;
