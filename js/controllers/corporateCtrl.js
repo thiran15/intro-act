@@ -21,6 +21,167 @@ angular.module('myApp.corporateCtrl', ['ui.bootstrap','socialshare'])
     })
     .controller('newslettercategoryCtrl', function ($scope, $http, $location, $routeParams, localStorageService, RequestDetail, configdetails, $sce, usertype,alertService,$timeout) {
 
+      $scope.managenewsletterpopup = 'hidden';
+
+      $scope.managesubpopopen = function () {
+        $scope.managenewsletterpopup = '';
+      }
+
+      $scope.manageclosenewsletterpopup = function () {
+        $scope.managenewsletterpopup = 'hidden';
+      }
+
+      $scope.managenewslettercontact = {};
+      $scope.managenewslettercontact.type = {};
+
+      
+      $scope.login_status = 0;
+
+
+      $scope.newsletterpopup = 'hidden';
+      $scope.opennewsletterpopup = function () {
+        $scope.newsletterpopup = '';
+      }
+
+      $scope.closenewsletterpopup = function () {
+        $scope.newsletterpopup = 'hidden';
+      }
+
+      var url = "apiv4/public/user/getallnewsletters";
+      var params = {};
+      RequestDetail.getDetail(url, params).then(function (result) { // Result return
+        $scope.login_status = result.data.login_status; 
+
+        if(result.data.type.ResearchSpotlight){
+          $scope.managenewslettercontact.type['ResearchSpotlight'] = true;
+        }
+        if(result.data.type.irfundamental){
+          $scope.managenewslettercontact.type['irfundamental'] = true;
+        }
+        if(result.data.type.stash){
+          $scope.managenewslettercontact.type['stash'] = true;
+        }
+        if(result.data.type.spac){
+          $scope.managenewslettercontact.type['spac'] = true;
+        }
+        if(result.data.type.spacetech){
+          $scope.managenewslettercontact.type['spacetech'] = true;
+        }
+        if(result.data.type.fintech){
+          $scope.managenewslettercontact.type['fintech'] = true;
+        }
+        if(result.data.type.metaverse){
+          $scope.managenewslettercontact.type['metaverse'] = true;
+        } 
+        
+      });
+
+
+      $scope.newsletterupdate = function () { 
+
+        if (!$scope.valid) {
+            alertService.add("warning", "Please enter correct captcha!", 2000);
+            return false;
+        }
+  
+        $scope.typearray = [];
+
+        $scope.spinnerActive = true; 
+
+        $.each($scope.managenewslettercontact.type, function (indus,index) {
+           if(index){
+              $scope.typearray.push({
+                status: 1,
+                type: indus
+              }); 
+           }else{
+              $scope.typearray.push({
+                status: 0,
+                type: indus
+              }); 
+           }
+           
+        });
+ 
+        var url = "apiv4/public/corporate/newsletterupdate";
+        var params = {contact:$scope.typearray};
+        RequestDetail.getDetail(url, params).then(function (result) { // Result return
+          $scope.managenewslettersucessstate = true;
+          
+          $scope.spinnerActive = false;
+
+          $timeout(function () {
+            $scope.managenewslettersucessstate = false;
+            $scope.managenewsletterpopup = 'hidden';		
+          }, 1000);
+        });
+      }
+
+
+      $scope.newslettercontact = {};
+		$scope.newslettercontact.type={};
+		$scope.newslettersucessstate = false;
+		$scope.newsletterregister = function () {
+			if (!$scope.valid) {
+				alertService.add("warning", "Please enter correct captcha!", 2000);
+				return false;
+			}
+			if (angular.isUndefined($scope.newslettercontact.name) || $scope.newslettercontact.name == '') {
+				alertService.add("warning", "Please enter name !", 2000);
+				return false;
+			}
+			if (angular.isUndefined($scope.newslettercontact.email) || $scope.newslettercontact.email == '') {
+				alertService.add("warning", "Please enter email !", 2000);
+				return false;
+			}
+			if (!$scope.checkemailval($scope.newslettercontact.email)) {
+				alertService.add("warning", "Please enter valid email!", 2000);
+				return false;
+			}
+			if (angular.isUndefined($scope.newslettercontact.company) || $scope.newslettercontact.company == '') {
+				alertService.add("warning", "Please enter company!", 2000);
+				return false;
+			}
+			if (angular.isUndefined($scope.newslettercontact.type) || $scope.newslettercontact.type == '') {
+				alertService.add("warning", "Please enter type!", 2000);
+				return false;
+			}else{
+				var checknewsletterinput = true;
+				$.each($scope.newslettercontact.type, function (index, industry) {
+					if (industry == true) {
+						checknewsletterinput = false;
+					}
+				});
+
+				if(checknewsletterinput){
+					alertService.add("warning", "Please enter type!", 2000);
+					return false;
+				}
+			}
+			
+			$scope.newslettercontact.typearray = [];
+
+			$.each($scope.newslettercontact.type, function (index, data) {
+				if (data == true) {
+					$scope.newslettercontact.typearray.push(index);
+				}
+			});
+
+
+			var url = "apiv4/public/corporate/newsletterregister";
+			var params = {contact:$scope.newslettercontact};
+			RequestDetail.getDetail(url, params).then(function (result) { // Result return
+				$scope.newslettersucessstate = true;
+				$scope.newslettercontact = {};
+
+				$timeout(function () {
+					$scope.newslettersucessstate = false;
+					$scope.newsletterpopup = 'hidden';		
+				}, 1000);
+			});
+		}
+
+      
       
        
 
