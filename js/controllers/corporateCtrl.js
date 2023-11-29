@@ -47,10 +47,14 @@ angular.module('myApp.corporateCtrl', ['ui.bootstrap','socialshare'])
         $scope.newsletterpopup = 'hidden';
       }
 
+      $scope.checkbutton = 0;
+
       var url = "apiv4/public/user/getallnewsletters";
       var params = {};
       RequestDetail.getDetail(url, params).then(function (result) { // Result return
         $scope.login_status = result.data.login_status; 
+
+       
 
         if(result.data.type.ResearchSpotlight){
           $scope.managenewslettercontact.type['ResearchSpotlight'] = true;
@@ -73,7 +77,7 @@ angular.module('myApp.corporateCtrl', ['ui.bootstrap','socialshare'])
         if(result.data.type.metaverse){
           $scope.managenewslettercontact.type['metaverse'] = true;
         } 
-        
+        $scope.checkbutton = 1;
       });
 
 
