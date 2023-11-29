@@ -47,7 +47,7 @@ angular.module('myApp.corporateCtrl', ['ui.bootstrap','socialshare'])
         $scope.newsletterpopup = 'hidden';
       }
 
-      $scope.checkbutton = 0;
+      $scope.checkbutton = '0';
 
       var url = "apiv4/public/user/getallnewsletters";
       var params = {};
@@ -77,7 +77,7 @@ angular.module('myApp.corporateCtrl', ['ui.bootstrap','socialshare'])
         if(result.data.type.metaverse){
           $scope.managenewslettercontact.type['metaverse'] = true;
         } 
-        $scope.checkbutton = 1;
+        $scope.checkbutton = '1';
       });
 
 
