@@ -21,6 +21,8 @@ angular.module('myApp.corporateCtrl', ['ui.bootstrap','socialshare'])
     })
     .controller('newslettercategoryCtrl', function ($scope, $http, $location, $routeParams, localStorageService, RequestDetail, configdetails, $sce, usertype,alertService,$timeout) {
 
+      $scope.emailhash = $routeParams.hashId;
+
       $scope.managenewsletterpopup = 'hidden';
 
       $scope.managesubpopopen = function () {
@@ -48,9 +50,10 @@ angular.module('myApp.corporateCtrl', ['ui.bootstrap','socialshare'])
       }
 
       $scope.checkbutton = '0';
+ 
 
       var url = "apiv4/public/user/getallnewsletters";
-      var params = {};
+      var params = {emailhash:$scope.emailhash};
       RequestDetail.getDetail(url, params).then(function (result) { // Result return
         $scope.login_status = result.data.login_status; 
 
@@ -77,7 +80,10 @@ angular.module('myApp.corporateCtrl', ['ui.bootstrap','socialshare'])
         if(result.data.type.metaverse){
           $scope.managenewslettercontact.type['metaverse'] = true;
         } 
-        $scope.checkbutton = '1';
+        
+        $timeout(function () {
+					$scope.checkbutton = '1';		
+				}, 1000);
       });
 
 
@@ -108,7 +114,7 @@ angular.module('myApp.corporateCtrl', ['ui.bootstrap','socialshare'])
         });
  
         var url = "apiv4/public/corporate/newsletterupdate";
-        var params = {contact:$scope.typearray};
+        var params = {contact:$scope.typearray,email:$scope.emailhash};
         RequestDetail.getDetail(url, params).then(function (result) { // Result return
           $scope.managenewslettersucessstate = true;
           
