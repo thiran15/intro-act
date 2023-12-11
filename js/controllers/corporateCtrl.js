@@ -50,6 +50,11 @@ angular.module('myApp.corporateCtrl', ['ui.bootstrap','socialshare'])
       }
 
       $scope.checkbutton = '0';
+
+
+      if($routeParams.hashId){
+        $scope.managenewsletterpopup = '';
+      }
  
 
       var url = "apiv4/public/user/getallnewsletters";

@@ -7838,6 +7838,53 @@ angular.module('myApp.distributeContentCtrl', ['ui.bootstrap'])
         $scope.closepopup = function () {
             $scope.showModalcontactsedit = false;
             $scope.showModalcontacts = false;
+            $scope.showAllModallist = false;
+        }
+
+        $scope.popupinvesterslist = [];
+
+        $scope.showAllModallist = false;
+        $scope.showalllist = function () {
+            
+            $scope.popupinvesterslist = [];
+            $scope.search_lst ='';
+
+            angular.forEach($scope.investerslist, function (data,key) {
+               
+                if ($scope.dcdata.addinvesterslists.indexOf(data.investor_list_name) == -1) {
+                    $scope.popupinvesterslist.push(data.investor_list_name);
+                }
+            });
+ 
+            
+            $scope.showAllModallist = true;
+        }
+
+        $scope.addlisttoselected = function (listname) {
+            if ($scope.dcdata.addinvesterslists.indexOf(listname) == -1) {
+                $scope.dcdata.addinvesterslists.push(listname);
+
+                var index =  $scope.popupinvesterslist.indexOf(listname);
+                if (index > -1) {
+                    $scope.popupinvesterslist.splice(index, 1);
+                }
+            }
+        }
+
+        $scope.dcdata.list_type = '7';
+        $scope.dcdata.list_distribute_status = 1;
+
+        $scope.list_typechange = function () {
+            if($scope.dcdata.list_type==7){
+                 $scope.dcdata.list_distribute_status = 1;
+            }else{
+                 $scope.dcdata.list_distribute_status = 0;
+                 $scope.dcdata.filtertickers = '';
+                 $scope.dcdata.addinvesterslists = [];
+                 $scope.dcdata.sectors = [];
+                 $scope.dcdata.industry_tag = [];
+                 $scope.dcdata.tickers = [];
+            }
         }
 
 
@@ -8172,14 +8219,18 @@ angular.module('myApp.distributeContentCtrl', ['ui.bootstrap'])
                         alertService.add("warning", "Please enter description !", 2000);
                         return false;
                     }
-                
-                    if (angular.isUndefined($scope.dcdata.email) || $scope.dcdata.email == '') {
-                        if ($scope.dcdata.addinvesterslists.length == 0) {
-                            alertService.add("warning", "Please enter email or select distribution list !", 2000);
-                            return false;
+
+                    if($scope.dcdata.list_type==7){
+                        if (angular.isUndefined($scope.dcdata.email) || $scope.dcdata.email == '') {
+                            if ($scope.dcdata.addinvesterslists.length == 0) {
+                                alertService.add("warning", "Please enter email or select distribution list !", 2000);
+                                return false;
+                            }
+                            
                         }
-                        
                     }
+                
+                   
     
                     if($scope.dcdata.send_type==2){
                         if (angular.isUndefined($scope.dcdata.send_date) || $scope.dcdata.send_date == '') {
@@ -8208,13 +8259,14 @@ angular.module('myApp.distributeContentCtrl', ['ui.bootstrap'])
                         
                     }
     
-                
-                    if ($scope.dcdata.addinvesterslists.length == 0) {
-                        if (angular.isUndefined($scope.dcdata.email) || $scope.dcdata.email == '') {
-                            alertService.add("warning", "Please enter email or select distribution list  !", 2000);
-                            return false;
+                    if($scope.dcdata.list_type==7){
+                        if ($scope.dcdata.addinvesterslists.length == 0) {
+                            if (angular.isUndefined($scope.dcdata.email) || $scope.dcdata.email == '') {
+                                alertService.add("warning", "Please enter email or select distribution list  !", 2000);
+                                return false;
+                            }
+                        
                         }
-                    
                     }
     
                 
