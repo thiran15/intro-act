@@ -202,7 +202,7 @@ angular.module('myApp.corporateCtrl', ['ui.bootstrap','socialshare'])
 
     })
 
-    .controller('contactstaticCtrl', function ($scope, $http, $location, $routeParams, localStorageService, RequestDetail, configdetails, $sce, usertype,alertService,$rootScope, Captcha) {
+   .controller('contactstaticCtrl', function ($scope, $http, $location, $routeParams, localStorageService, RequestDetail, configdetails, $sce, usertype,alertService,$rootScope, Captcha) {
         $scope.contact = {}; 
 		$scope.sucessstate = false;
 
@@ -257,6 +257,66 @@ angular.module('myApp.corporateCtrl', ['ui.bootstrap','socialshare'])
        
 
     })
+
+    .controller('newdealflowstaticCtrl', function ($scope, $http, $location, $routeParams, localStorageService, RequestDetail, configdetails, $sce, usertype,alertService,$rootScope, Captcha) {
+      $scope.dealflow = {}; 
+      $scope.sucessstate = false;
+
+      $scope.privacy = false;
+
+      $scope.checkemailval = function (email) {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+      }
+
+      $scope.upload_prfhomebanner_img = function (imgdata) {
+        $scope.dealflow.homebanner = 'uploads/dealflow/'+imgdata;
+      }
+
+      $scope.newdealflowsubmit = function () {
+    
+        if (angular.isUndefined($scope.dealflow.title) || $scope.dealflow.title == '') {
+          alertService.add("warning", "Please enter title !", 2000);
+          return false;
+        }
+        if (angular.isUndefined($scope.dealflow.homebanner) || $scope.dealflow.homebanner == '') {
+          alertService.add("warning", "Please upload logo !", 2000);
+          return false;
+        } 
+        if (angular.isUndefined($scope.dealflow.type) || $scope.dealflow.type == '') {
+          alertService.add("warning", "Please select type!", 2000);
+          return false;
+        }
+        if (angular.isUndefined($scope.dealflow.sector) || $scope.dealflow.sector == '') {
+          alertService.add("warning", "Please select sector!", 2000);
+          return false;
+        }
+        if (angular.isUndefined($scope.dealflow.raisesize) || $scope.dealflow.raisesize == '') {
+          alertService.add("warning", "Please select raisesize!", 2000);
+          return false;
+        }
+        
+        if (angular.isUndefined($scope.dealflow.content) || $scope.dealflow.content == '') {
+          alertService.add("warning", "Please enter content!", 2000);
+          return false;
+        }
+              
+              
+        $scope.spinnerActive = true;
+
+        var url = "apiv4/public/user/dealflowadd";
+        var params = {data:$scope.dealflow};
+        RequestDetail.getDetail(url, params).then(function (result) { // Result return
+          $scope.sucessstate = true;
+          $scope.spinnerActive = false;
+          $scope.dealflow = {};
+
+          alertService.add("success", "Sent sucessfully !",2000);
+        });
+      }
+     
+
+  })
     
     .controller('resetCtrl', function ($scope, $http, $location, $routeParams, localStorageService, RequestDetail, configdetails, $sce, usertype,alertService,$rootScope, Captcha, $timeout) {
 
