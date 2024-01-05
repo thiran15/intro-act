@@ -4122,6 +4122,8 @@ angular.module('myApp.profileCtrl', ['ui.bootstrap'])
 		$scope.login.email = '';
 		$scope.login.password = '';
 
+		
+
 		$scope.demorequest = {};
 		$scope.demorequest.email = '';
 		$scope.demorequest.name = '';
@@ -10733,16 +10735,59 @@ angular.module('myApp.profileCtrl', ['ui.bootstrap'])
 		$scope.peersTickers = [];
 
 		$scope.peers_load = false;
+		$scope.showalreadyerror = false;
 
 		$scope.onSelectedTicker = function (ticker) { 
+
+			$scope.showalreadyerror = false;
+			
+			if($scope.report.company==""){
+				alertService.add("warning", "Please Enter Company Name!", 2000);
+				$scope.report.ticker = [];
+				return false;
+			}
+			if($scope.report.name==""){
+				alertService.add("warning", "Please Enter Name!", 2000);
+				$scope.report.ticker = [];
+				return false;
+			}
+		   
+			if($scope.report.email==""){
+				alertService.add("warning", "Please Enter Email!", 2000);
+				$scope.report.ticker = [];
+				return false;
+			}
+
+			if (!$scope.checkemailval($scope.report.email)) {
+				alertService.add("warning", "Please Enter Valid Email!", 2000);
+				$scope.report.ticker = [];
+				return false;
+			}
+			if($scope.report.phone==""){
+				alertService.add("warning", "Please Enter Phone Number!", 2000);
+				$scope.report.ticker = [];
+				return false;
+			}
+			if(!$scope.report.newtickerrequest){
+				$scope.report.newticker = $scope.report.ticker[0];
+			}
+
 			$scope.peersTickers = [];
 			$scope.peers_load = true;
+			//$scope.peers_load = false;
 
 			var tagUrl = 'apiv4/public/user/getscorecardpeers'; 
-			var params = {ticker:ticker,email:$scope.report.email};
+			var params = {ticker:ticker,email:$scope.report.email,report:$scope.report};
 			RequestDetail.getDetail(tagUrl, params).then(function (result) { 
-				$scope.peersTickers = result.data.original_peers;
-				$scope.peers_load = false;
+
+				if(result.data.status){
+					$scope.peersTickers = result.data.original_peers;
+					$scope.peers_load = false;
+				}else{
+					$scope.showalreadyerror = true;
+				}
+
+				
 			});
 		}
 		
@@ -10765,8 +10810,8 @@ angular.module('myApp.profileCtrl', ['ui.bootstrap'])
 
 		$scope.submitrequest = function () {
 			if(!$scope.peers_load){
-				console.log($scope.report);
-				console.log($scope.peersTickers);
+				//console.log($scope.report);
+				//console.log($scope.peersTickers);
 	 
 				if (angular.isUndefined($scope.report.newticker) && $scope.report.ticker.length == 0) {
 					alertService.add("warning", "Please Enter Ticker!", 2000);
@@ -10824,6 +10869,9 @@ angular.module('myApp.profileCtrl', ['ui.bootstrap'])
 					$scope.report.newtickerrequest = 0;
 					alertService.add("success", "Requested Successfully !", 2000);
 				});
+			}else{
+				alertService.add("warning", "Ticker is currently unavailable!", 2000);
+				return false;
 			}
 
 			
@@ -12814,6 +12862,60 @@ angular.module('myApp.profileCtrl', ['ui.bootstrap'])
         }
 
         var url = 'apiv4/public/dashboard/getmetaversearchive';
+        var params = { };
+        RequestDetail.getDetail(url, params).then(function (result) {
+            $scope.archives = result.data;
+            $scope.spinnerActive = false;
+        });
+    })
+
+	.controller('mobilityarchiveCtrl', function ($scope, $routeParams, $http, $location, RequestDetail, alertService, configdetails, localStorageService) {
+        $scope.sidepopupactive=false;
+        $scope.spinnerActive = true;
+	    $scope.sidepopup = function() {
+		    $scope.sidepopupactive=!$scope.sidepopupactive;
+        }
+
+        var url = 'apiv4/public/dashboard/getmobilityarchive';
+        var params = { };
+        RequestDetail.getDetail(url, params).then(function (result) {
+            $scope.archives = result.data;
+            $scope.spinnerActive = false;
+        });
+    }).controller('agtecharchiveCtrl', function ($scope, $routeParams, $http, $location, RequestDetail, alertService, configdetails, localStorageService) {
+        $scope.sidepopupactive=false;
+        $scope.spinnerActive = true;
+	    $scope.sidepopup = function() {
+		    $scope.sidepopupactive=!$scope.sidepopupactive;
+        }
+
+        var url = 'apiv4/public/dashboard/getagtecharchive';
+        var params = { };
+        RequestDetail.getDetail(url, params).then(function (result) {
+            $scope.archives = result.data;
+            $scope.spinnerActive = false;
+        });
+    }).controller('cleantecharchiveCtrl', function ($scope, $routeParams, $http, $location, RequestDetail, alertService, configdetails, localStorageService) {
+        $scope.sidepopupactive=false;
+        $scope.spinnerActive = true;
+	    $scope.sidepopup = function() {
+		    $scope.sidepopupactive=!$scope.sidepopupactive;
+        }
+
+        var url = 'apiv4/public/dashboard/getcleantecharchive';
+        var params = { };
+        RequestDetail.getDetail(url, params).then(function (result) {
+            $scope.archives = result.data;
+            $scope.spinnerActive = false;
+        });
+    }).controller('healthcarearchiveCtrl', function ($scope, $routeParams, $http, $location, RequestDetail, alertService, configdetails, localStorageService) {
+        $scope.sidepopupactive=false;
+        $scope.spinnerActive = true;
+	    $scope.sidepopup = function() {
+		    $scope.sidepopupactive=!$scope.sidepopupactive;
+        }
+
+        var url = 'apiv4/public/dashboard/gethealthcarearchive';
         var params = { };
         RequestDetail.getDetail(url, params).then(function (result) {
             $scope.archives = result.data;

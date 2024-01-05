@@ -964,7 +964,7 @@ angular.module('myApp.directives', [])
       }
     }
   })
-  .directive('staticnewheaderDirective', function ($location, localStorageService, RequestDetail, $rootScope, $controller, alertService, $timeout, $route, $window, validation, $http, $routeParams, usertype, configdetails, Useractivity) {
+  .directive('staticnewheaderDirective', function ($location, localStorageService, RequestDetail, $rootScope, $controller, alertService, $timeout, $route, $window, validation, $http, $routeParams, usertype, configdetails, Useractivity, MetaService) {
 
 
     var user = localStorageService.get('usertype');
@@ -984,6 +984,9 @@ angular.module('myApp.directives', [])
 
         $scope.loadingbutton = false; 
         $scope.sactivemenu = 2;
+
+        MetaService.setTitle('Financial Technology Company | Intro-act');
+    	  MetaService.setMetaDescription('Intro-Act is a financial technology company that combines machine learning analytics with workflow optimization software.');
 
         if($location.path()=='/login' || $location.path()=='/newslettercategory'  || $location.path()=='/stasharchive' || $location.path()=='/irarchive' || $location.path()=='/spacarchive' || $location.path()=='/topresearchproviders' || $location.path().indexOf('/researchspotlight/') != -1){
           $scope.sactivemenu = 1;

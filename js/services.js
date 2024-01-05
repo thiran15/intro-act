@@ -184,7 +184,27 @@ function($http, $q) {
       return $rootScope.userPermission;
     }
   };
-});
+}).service('MetaService', ['$rootScope', function($rootScope) {
+  var title = 'Financial Technology Company | Intro-act';
+  var metaDescription = 'Intro-Act is a financial technology company that combines machine learning analytics with workflow optimization software.';
+
+  return {
+    getTitle: function() {
+      return title;
+    },
+    setTitle: function(newTitle) {
+      title = newTitle;
+      $rootScope.title = newTitle;
+    },
+    getMetaDescription: function() {
+      return metaDescription;
+    },
+    setMetaDescription: function(newDescription) {
+      metaDescription = newDescription;
+      $rootScope.metaDescription = newDescription;
+    }
+  };
+}]);
 angular.module('angular.css.injector', [])
 .provider('cssInjector', ['$interpolateProvider', function($interpolateProvider) {
 	var singlePageMode = false;
