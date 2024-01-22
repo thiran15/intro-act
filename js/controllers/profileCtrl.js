@@ -12951,6 +12951,20 @@ angular.module('myApp.profileCtrl', ['ui.bootstrap'])
             $scope.spinnerActive = false;
         });
     })
+	.controller('esgarchive', function ($scope, $routeParams, $http, $location, RequestDetail, alertService, configdetails, localStorageService) {
+        $scope.sidepopupactive=false;
+        $scope.spinnerActive = true;
+	    $scope.sidepopup = function() {
+		    $scope.sidepopupactive=!$scope.sidepopupactive;
+        }
+
+        var url = 'apiv4/public/dashboard/getesgarchive';
+        var params = { };
+        RequestDetail.getDetail(url, params).then(function (result) {
+            $scope.archives = result.data;
+            $scope.spinnerActive = false;
+        });
+    })
     .controller('engagementDashboard', function ($scope, $http, $location, $routeParams, localStorageService, RequestDetail, configdetails, $sce, usertype,alertService) {
 
         //First graph 

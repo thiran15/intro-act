@@ -12616,6 +12616,23 @@ angular.module('myApp.distributeContentCtrl', ['ui.bootstrap'])
 		
 
 	})
+    .controller('dailyesgs_viewCtrl', function ($scope, $http, $location, $route, $routeParams, localStorageService, RequestDetail, $window, configdetails, alertService,$sce) {
+		$scope.dailyhtml = "";
+	
+		$scope.trustAsHtml = function(html) {
+		  return $sce.trustAsHtml(html);
+		}
+
+		var senddailymail = 'apiv4/public/dashboard/senddailyesgsmailcontent';
+		var params = {
+			 dailyId:$routeParams.dailyId
+		}
+		RequestDetail.getDetail(senddailymail,params).then(function(result){ // The fasctory RequestDetail reused in Investors and corporates
+			$scope.dailyhtml  = result.data.htmlview;
+		});
+		
+
+	})
 	.controller('stash_viewCtrl', function ($scope, $http, $location, $route, $routeParams, localStorageService, RequestDetail, $window, configdetails, alertService,$sce) {
 		$scope.stashhtml = "";
 	
