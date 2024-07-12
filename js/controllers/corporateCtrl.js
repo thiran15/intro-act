@@ -85,6 +85,25 @@ angular.module('myApp.corporateCtrl', ['ui.bootstrap','socialshare'])
         if(result.data.type.metaverse){
           $scope.managenewslettercontact.type['metaverse'] = true;
         } 
+
+        
+
+
+
+
+        if(result.data.type.mobility){
+          $scope.managenewslettercontact.type['mobility'] = true;
+        } 
+        if(result.data.type.disruptivetech){
+          $scope.managenewslettercontact.type['disruptivetech'] = true;
+        } 
+        if(result.data.type.healthcare){
+          $scope.managenewslettercontact.type['healthcare'] = true;
+        } 
+        if(result.data.type.cleantech){
+          $scope.managenewslettercontact.type['cleantech'] = true;
+        } 
+
         
         $timeout(function () {
 					$scope.checkbutton = '1';		
@@ -801,6 +820,10 @@ angular.module('myApp.corporateCtrl', ['ui.bootstrap','socialshare'])
         if($scope.industry_title=='Disruptive Tech'){
             $scope.primer_status = 1;
             $scope.primer_file='Creator Economy_Riding the Monetization Wave_033022.pdf';
+
+            $scope.dashboarddatas = {
+              0: { pdf: "https://app.powerbi.com/view?r=eyJrIjoiZWU4NDk3NjgtZDY5OS00OTllLWFmYzUtNDgyM2QwOGQ1ZmQ1IiwidCI6IjQzZDI5NzNlLTJiYTQtNDljNy1iYTM5LTllZDc4MmQwMWEwZiIsImMiOjN9", name: "Disruptive Tech"},
+          };
         }
         
         if($scope.industry_title=='FinTech'){
@@ -819,8 +842,8 @@ angular.module('myApp.corporateCtrl', ['ui.bootstrap','socialshare'])
             $scope.primer_file='Space Tech_Primer.pdf';
  
             $scope.dashboarddatas = {
-                0: { pdf: "https://app.powerbi.com/view?r=eyJrIjoiZDZmODE5ZWItNjFlYS00NDlmLTlmMmItN2UwODMxMjA4NThiIiwidCI6IjQzZDI5NzNlLTJiYTQtNDljNy1iYTM5LTllZDc4MmQwMWEwZiIsImMiOjN9", name: "Launches Dashboard"},
-                1: { pdf: "https://app.powerbi.com/view?r=eyJrIjoiNDc5YjJhMjQtMTdlZC00MWMwLTkxMTktZjJjZmMyMWIwMjY3IiwidCI6IjQzZDI5NzNlLTJiYTQtNDljNy1iYTM5LTllZDc4MmQwMWEwZiIsImMiOjN9", name: "Government Contracts and Private Funding Dashboard"},
+                0: { pdf: "https://app.powerbi.com/view?r=eyJrIjoiNGRmZTViNmMtNTczMS00YWU1LWE1NjItMDZlNTM5YTdlOTZkIiwidCI6IjQzZDI5NzNlLTJiYTQtNDljNy1iYTM5LTllZDc4MmQwMWEwZiIsImMiOjN9", name: "Launches Dashboard"},
+                1: { pdf: "https://app.powerbi.com/view?r=eyJrIjoiOGFkY2EwMGUtMzNiYS00ZDVhLTk4YzgtNjk1M2MzNDJiZDBlIiwidCI6IjQzZDI5NzNlLTJiYTQtNDljNy1iYTM5LTllZDc4MmQwMWEwZiIsImMiOjN9", name: "Government Contracts and Private Funding Dashboard"},
             };
 
         }
@@ -2771,6 +2794,15 @@ angular.module('myApp.corporateCtrl', ['ui.bootstrap','socialshare'])
         $scope.showvideopopupModal = false;
 
     };
+
+    $scope.profiletabde = 1;
+    $scope.profiletabdes = function (act) {
+        $scope.profiletabde = act;
+    }
+
+    $scope.trustAsHtml = function(html) {
+      return $sce.trustAsHtml(html);
+    }
 									   
     $scope.showModalpageinfo = false;
 

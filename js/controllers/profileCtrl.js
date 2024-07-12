@@ -10710,6 +10710,8 @@ angular.module('myApp.profileCtrl', ['ui.bootstrap'])
 		$scope.report.ticker = [];
 		$scope.report.agree = false;
 
+		$scope.successmsgstate = false;
+
 		$scope.report.newtickerrequest = 0;
 
 		$scope.termspopupmodel = false;
@@ -10717,6 +10719,11 @@ angular.module('myApp.profileCtrl', ['ui.bootstrap'])
 		$scope.newtickeropen = function (val) {
 			$scope.report.newtickerrequest = val;
 		}
+
+		$scope.backnewticker = function () {
+			$scope.report.newtickerrequest = 0;
+		}
+		
 
 		$scope.get_search_details = function () { 
             var tagUrl = 'apiv4/public/dashboard/get_auto_ticker_stocklive1';
@@ -10737,9 +10744,21 @@ angular.module('myApp.profileCtrl', ['ui.bootstrap'])
 		$scope.peers_load = false;
 		$scope.showalreadyerror = false;
 
+
+		$scope.newtickerlink = true;
+
 		$scope.onSelectedTicker = function (ticker) { 
 
+			 
 			$scope.showalreadyerror = false;
+
+			console.log($scope.report);
+
+			if($scope.report.company=="" || $scope.report.name=="" || $scope.report.email=="" || $scope.report.phone==""){
+				alertService.add("warning", "Please enter all information before selecting a ticker.!", 2000);
+				$scope.report.ticker = [];
+				return false;
+			}
 			
 			if($scope.report.company==""){
 				alertService.add("warning", "Please Enter Company Name!", 2000);
@@ -10867,6 +10886,7 @@ angular.module('myApp.profileCtrl', ['ui.bootstrap'])
 					$scope.peersTickers = [];
 	
 					$scope.report.newtickerrequest = 0;
+					$scope.successmsgstate = true;
 					alertService.add("success", "Requested Successfully !", 2000);
 				});
 			}else{
@@ -12868,7 +12888,20 @@ angular.module('myApp.profileCtrl', ['ui.bootstrap'])
             $scope.spinnerActive = false;
         });
     })
+	.controller('disruptivetecharchiveCtrl', function ($scope, $routeParams, $http, $location, RequestDetail, alertService, configdetails, localStorageService) {
+        $scope.sidepopupactive=false;
+        $scope.spinnerActive = true;
+	    $scope.sidepopup = function() {
+		    $scope.sidepopupactive=!$scope.sidepopupactive;
+        }
 
+        var url = 'apiv4/public/dashboard/getdisruptivetecharchive';
+        var params = { };
+        RequestDetail.getDetail(url, params).then(function (result) {
+            $scope.archives = result.data;
+            $scope.spinnerActive = false;
+        });
+    })
 	.controller('mobilityarchiveCtrl', function ($scope, $routeParams, $http, $location, RequestDetail, alertService, configdetails, localStorageService) {
         $scope.sidepopupactive=false;
         $scope.spinnerActive = true;

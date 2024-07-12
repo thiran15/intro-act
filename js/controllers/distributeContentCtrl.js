@@ -5781,7 +5781,8 @@ angular.module('myApp.distributeContentCtrl', ['ui.bootstrap'])
             } 
         }
         
-        
+        $scope.loadmorebutton = 1;
+        $scope.detailpagecount = 1;
 
         $scope.getlist = function (count) {
             if($routeParams.distributeId){
@@ -5822,7 +5823,10 @@ angular.module('myApp.distributeContentCtrl', ['ui.bootstrap'])
 
                    
                     if($scope.total_count >= result.data.page){
-                        $scope.getlist(result.data.page);
+                        $scope.detailpagecount =  result.data.page;
+                        //$scope.getlist(result.data.page);
+                    }else{
+                        $scope.loadmorebutton = 0;
                     }
 
                     $scope.processed_total = parseInt($scope.processed_total)+parseInt(result.data.processed_total);
