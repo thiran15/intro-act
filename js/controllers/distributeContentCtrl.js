@@ -5784,13 +5784,16 @@ angular.module('myApp.distributeContentCtrl', ['ui.bootstrap'])
         $scope.loadmorebutton = 1;
         $scope.detailpagecount = 1;
 
+        $scope.searchtext = '';
+
+
         $scope.getlist = function (count) {
             if($routeParams.distributeId){
                 $scope.distributeId = $routeParams.distributeId;
                 $scope.spinnerActive = true;
     
                 var url = 'apiv4/public/researchprovider/getanalytics';
-                var params = {distribute_content_id:$scope.distributeId, page: count};
+                var params = {distribute_content_id:$scope.distributeId, page: count, searchtext:$scope.searchtext};
     
                 $scope.loaderstatus = 1;
 
@@ -5801,9 +5804,18 @@ angular.module('myApp.distributeContentCtrl', ['ui.bootstrap'])
                     $scope.descriptionresults = result.data.description;
 
                     $scope.distribute_content_id = result.data.distribute_content_id;
+
+                    if(count==1){
+                        $scope.analyticsresults.analytics = [];
+                    }
+                    
                   
                     angular.forEach(result.data.analytics, function (analytic) {
+
+                       
                         $scope.analyticsresults.analytics.push(analytic);
+
+
                         if(analytic.bounce){
                             $scope.bounces.push({
                                 email: analytic.email,
